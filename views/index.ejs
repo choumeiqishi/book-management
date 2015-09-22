@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="bookApp">
+  	<head>
+    	<title>左图右书</title>  	
+    	<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    	<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap-theme.min.css">
+    	<link rel="stylesheet" href="/stylesheets/base.css">
+    	<link rel="stylesheet" href="/stylesheets/app.css">
+    	<script src="/javascripts/angular.min.js"></script>
+    	<script src="/javascripts/angular-ui-router.js"></script>
+    	<script src="/javascripts/bookApp.js"></script>
+  	</head>
+
+  	<body>
+    	<div class="view-container">
+	        <nav class="navbar navbar-inverse navbar-fixed-top ztys-navbar">
+	            <div class="container-fluid">
+	                <div class="navbar-header">
+	                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+	                            data-target="#navbar" aria-expanded="false" 
+	                            aria-controls="navbar" id="ztysMenuCollapsed">
+	                        <span class="sr-only">Toggle navigation</span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                    </button>
+	                    <span class="navbar-brand">
+	                        <div class="ztys-logo-wrapper pull-left">
+	                            <img src="images/icon_logo.png">
+	                        </div>
+	                        <h1 class="ztys-system-title">左图右书</h1>
+	                    </span>
+	                </div>
+	                <div id="navbar" class="navbar-collapse collapse">
+	                    <ul class="nav navbar-nav" id="ztysMenu">
+	                        <li class="active"><a href="/#/books">所有图书</a></li>
+	                        <li><a href="/#/create">录入新书</a></li>
+	                    </ul>
+	                    <form class="navbar-form navbar-right ztys-nav-search">
+	                        <div class="form-group has-feedback">
+	                            <input type="text" class="form-control input-sm">
+	                            <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+	                        </div>
+	                    </form>
+	                </div>
+	            </div>
+	        </nav>
+
+	        <ui-view></ui-view>
+	    </div>
+  	</body>
+</html>
