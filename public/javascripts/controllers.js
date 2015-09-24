@@ -2,21 +2,21 @@
 
 /* Controllers */
 
-var phonecatControllers = angular.module('phonecatControllers', []);
+var bookControllers = angular.module('bookControllers', ['bookServices']);
 
-phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone',
-  function($scope, Phone) {
-    $scope.phones = Phone.query();
-    $scope.orderProp = 'age';
-  }]);
+// menu nav controller
+bookControllers.controller('NavController', ['$scope', function($scope){
+    
+}]);
 
-phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone',
-  function($scope, $routeParams, Phone) {
-    $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
-      $scope.mainImageUrl = phone.images[0];
-    });
-
-    $scope.setImage = function(imageUrl) {
-      $scope.mainImageUrl = imageUrl;
+// book list controller
+bookControllers.controller('ListController', ['$scope', 'BookService', function($scope, BookService){
+    $scope.books = BookService.books;
+    $scope.getStars = function(count){
+        var arr = [];
+        for (var i = 1; i <= count; i++) {
+            arr.push(i);
+        }
+        return arr;
     };
-  }]);
+}]);

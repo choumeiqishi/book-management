@@ -2,12 +2,18 @@
 
 /* App Module */
 
-var bookApp = angular.module('bookApp', ['ui.router']);
+var bookApp = angular.module('bookApp', ['ui.router', 'bookControllers']);
+
+bookApp.run(['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams){
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+}]);
 
 bookApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider.state('books', {
         url: '/books',
-        templateUrl: '/templates/book-list.html'
+        templateUrl: '/templates/book-list.html',
+        controller: 'ListController'
     }).
     state('search', {
         url: '/search',
@@ -25,3 +31,4 @@ bookApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
 
     $urlRouterProvider.otherwise('books');
 }]);
+
