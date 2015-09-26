@@ -3,17 +3,9 @@
         <div class="col-sm-12 padding-left-5">
             <ul class="ztys-filter-condition">
                 <li class="ztys-filter-category">类别: </li>
-                <li class="active">全部</li>
-                <li>文学</li>
-                <li>少儿</li>
-                <li>教育</li>
-                <li>管理</li>
-                <li>励志与成功</li>
-                <li>人文社科</li>
-                <li>生活</li>
-                <li>艺术</li>
-                <li>科技</li>
-                <li>计算机与互联网</li>
+                <li ng-repeat="category in categoryList" ng-click="filterCategory(category.value)" ng-class="{active: category.selected}">
+                    {{ category.label }}
+                </li>
             </ul> 
         </div>
     </div>
@@ -21,9 +13,9 @@
         <div class="col-sm-12 padding-left-5">
             <ul class="ztys-filter-condition">
                 <li class="ztys-filter-category">状态: </li>
-                <li class="active">全部</li>
-                <li>已读</li>
-                <li>未读</li>
+                <li ng-repeat="status in statusList" ng-click="filterStatus(status.value)" ng-class="{active: status.selected}">
+                    {{ status.label }}
+                </li>
             </ul>
         </div>
     </div>
@@ -46,7 +38,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="book in books">
+            <tr ng-repeat="book in books | filter:search">
                 <td><a href="#/books/{{ book.id }}">{{ book.name }}</a></td>
                 <td>{{ book.author }}</td>
                 <td>{{ book.category }}</td>
@@ -55,9 +47,9 @@
                 <td>{{ book.date }}</td>
                 <td>{{ book.position }}</td>
                 <td>
-                    <span class="glyphicon glyphicon-ok green" ng-show="book.status === 2" title="已读"></span>
-                    <span class="glyphicon glyphicon-bookmark blue" ng-show="book.status === 1" title="正在读"></span>
-                    <span class="glyphicon glyphicon-time orange" ng-show="book.status === 0" title="未读"></span>
+                    <span class="glyphicon glyphicon-ok green" ng-show="book.status === 3" title="已读"></span>
+                    <span class="glyphicon glyphicon-bookmark blue" ng-show="book.status === 2" title="正在读"></span>
+                    <span class="glyphicon glyphicon-time orange" ng-show="book.status === 1" title="未读"></span>
                 </td>
                 <td>
                     <span class="glyphicon glyphicon-star ztys-star" ng-repeat="s in getStars(book.stars)"></span>
