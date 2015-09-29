@@ -1,56 +1,60 @@
 <div class="container-fluid margin-top-15">
-	<form class="form-horizontal f12">
+	<form class="form-horizontal f12" ng-submit="addBook()">
 		<div class="form-group">
 			<label class="col-sm-3 control-label">书名</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control input-sm">
+				<input type="text" class="form-control input-sm" ng-model="title">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">作者</label>
 			<div class="col-sm-3">
-				<input type="text" class="form-control input-sm">
+				<input type="text" class="form-control input-sm" ng-model="author">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">类别</label>
 			<div class="col-sm-3">
-				<select class="form-control input-sm">
-					<option>文学</option>
-					<option>少儿</option>
+				<select class="form-control input-sm" id="categorySelect" ng-model="categories.categorySelect">
+					<option value="">请选择</option>
+					<option ng-repeat="category in categories.list" value="{{category.value}}">
+						{{ category.label }}
+					</option>
 				</select>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">ISBN</label>
 			<div class="col-sm-3">
-				<input type="text" class="form-control input-sm">
+				<input type="text" class="form-control input-sm" ng-model="isbn">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">标签</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control input-sm">
+				<input type="text" class="form-control input-sm" ng-model="label">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">出版社</label>
 			<div class="col-sm-3">
-				<input type="text" class="form-control input-sm">
+				<input type="text" class="form-control input-sm" ng-model="press">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">收藏日期</label>
 			<div class="col-sm-3">
-				<input type="date" class="form-control input-sm">
+				<input type="date" class="form-control input-sm" ng-model="date">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">位置</label>
 			<div class="col-sm-3">
-				<select class="form-control input-sm">
-					<option>A1</option>
-					<option>A2</option>
+				<select class="form-control input-sm" id="positionSelect" ng-model="positions.positionSelect">
+					<option value="">请选择</option>
+					<option ng-repeat="position in positions.list" value="{{position.value}}">
+						{{ position.label }}
+					</option>
 				</select>
 			</div>
 		</div>
@@ -58,39 +62,39 @@
 			<label class="col-sm-3 control-label">状态</label>
 			<div class="col-sm-6 padding-top-5">
 				<label>
-  					<input type="radio" name="bookStatus" value="2"> 已读
+  					<input type="radio" ng-model="status" value="3"> 已读
 				</label>
 				<label class="margin-left-15">
-  					<input type="radio" name="bookStatus" value="1"> 正在读
+  					<input type="radio" ng-model="status" value="2"> 正在读
 				</label>
 				<label class="margin-left-15">
-  					<input type="radio" name="bookStatus" value="0" checked> 未读
+  					<input type="radio" ng-model="status" value="1" checked> 未读
 				</label>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">评价</label>
 			<div class="col-sm-3">
-				<input type="range" class="form-control input-sm" min="0" max="5" step="1" ng-model="appraise">
+				<input type="range" class="form-control input-sm" min="0" max="5" step="1" ng-model="stars">
 			</div>
-			<p class="help-block">{{ appraise }}</p>
+			<p class="help-block">{{ stars }}</p>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">封面</label>
 			<div class="col-sm-3">
-				<input type="file" class="form-control input-sm">
+				<input id="cover" type="file" class="form-control input-sm" ng-model="cover">
 			</div>
 			<p class="help-block">400x600</p>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">备注</label>
 			<div class="col-sm-6">
-				<textarea class="form-control input-sm" rows="4"></textarea>
+				<textarea class="form-control input-sm" rows="4" ng-model="notes"></textarea>
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-6 col-sm-offset-3">
-				<button type="button" class="btn btn-success btn-sm">
+				<button type="submit" class="btn btn-success btn-sm">
 					<span class="glyphicon glyphicon-save" aria-hidden="true"></span> 保存
 				</button>
 			</div>

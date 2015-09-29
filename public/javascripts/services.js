@@ -29,6 +29,29 @@ bookServices.value('BookStatus', {
 	]
 });
 
+bookServices.value('BookPosition', {
+	list: [
+		{label: '6-1', value: 1},
+		{label: '6-2', value: 2},
+		{label: '6-3', value: 3},
+		{label: '6-4', value: 4},
+		{label: '5-1', value: 5},
+		{label: '5-2', value: 6},
+		{label: '5-3', value: 7},
+		{label: '5-4', value: 8},
+		{label: '4-1', value: 9},
+		{label: '4-2', value: 10},
+		{label: '4-3', value: 11},
+		{label: '4-4', value: 12},
+		{label: '3-1', value: 13},
+		{label: '3-2', value: 14},
+		{label: '2-1', value: 15},
+		{label: '2-2', value: 16},
+		{label: '1-1', value: 17},
+		{label: '1-2', value: 18}
+	]
+});
+
 bookServices.factory('BookService', [function(){
     var o = {
     	books: []
@@ -37,14 +60,14 @@ bookServices.factory('BookService', [function(){
     o.books = [
         {
             id: '1',
-            name: '黄金时代',
+            title: '黄金时代',
             author: '王小波',
             category: 1,
             isbn: 'WXB193321-3',
             label: '时代三部曲',
             press: '陕西师范大学',
             date: '2012-12-12',
-            position: 'A-1',
+            position: 1,
             status: 3,
             stars: 5,
             cover: 'images/literature/huangjinshidai-wangxiaobo.jpg',
@@ -52,14 +75,14 @@ bookServices.factory('BookService', [function(){
         },
         {
             id: '2',
-            name: '白银时代',
-            author: '王小波',
+            title: '白银时代',
+            author: '李银河',
             category: 2,
             isbn: 'WXB193321-4',
-            label: '时代三部曲',
+            label: '时代',
             press: '陕西师范大学',
             date: '2012-12-12',
-            position: 'A-1',
+            position: 2,
             status: 2,
             stars: 4,
             cover: 'images/literature/baiyinshidai-wangxiaobo.jpg',
@@ -67,20 +90,39 @@ bookServices.factory('BookService', [function(){
         },
         {
             id: '3',
-            name: '青铜时代',
+            title: '青铜时代',
             author: '王小波',
             category: 3,
             isbn: 'WXB193321-4',
-            label: '时代三部曲',
-            press: '陕西师范大学',
+            label: '时代四部曲',
+            press: '陕西理工大学',
             date: '2012-12-12',
-            position: 'A-1',
+            position: 3,
+            status: 1,
+            stars: 4,
+            cover: 'images/literature/baiyinshidai-wangxiaobo.jpg',
+            notes: '看过多遍的一本小说'
+        },
+        {
+            id: '4',
+            title: '黑铁时代',
+            author: '王小波',
+            category: 3,
+            isbn: 'WXB193321-4',
+            label: '时代四部曲',
+            press: '陕西理工大学',
+            date: '2012-12-12',
+            position: 3,
             status: 1,
             stars: 4,
             cover: 'images/literature/baiyinshidai-wangxiaobo.jpg',
             notes: '看过多遍的一本小说'
         }
     ];
+
+    o.addBook = function (book) {
+    	this.books.push(book);
+    };
 
     return o;
 }]);

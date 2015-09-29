@@ -11,6 +11,7 @@ bookApp.run(['$rootScope', '$state', '$stateParams', function($rootScope, $state
 
 bookApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider.state('books', {
+        cache: false,
         url: '/books',
         templateUrl: '/templates/book-list.html',
         controller: 'ListController'
@@ -26,7 +27,8 @@ bookApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
     }).
     state('create', {
         url: '/create',
-        templateUrl: '/templates/book-new.html'
+        templateUrl: '/templates/book-new.html',
+        controller: 'CreationController'
     });
 
     $urlRouterProvider.otherwise('books');
