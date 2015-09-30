@@ -112,7 +112,7 @@ bookServices.factory('BookService', [function(){
             label: '时代四部曲',
             press: '陕西理工大学',
             date: '2015-12-12',
-            position: 3,
+            position: 4,
             status: 1,
             stars: 4,
             cover: 'images/literature/baiyinshidai-wangxiaobo.jpg',

@@ -16,10 +16,6 @@ bookApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         templateUrl: '/templates/book-list.html',
         controller: 'ListController'
     }).
-    state('settings', {
-        url: '/settings',
-        templateUrl: '/templates/settings.html'
-    }).
     state('detail', {
         url: '/books/{bookId}',
         templateUrl: '/templates/book-detail.html'

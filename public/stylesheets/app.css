@@ -32,7 +32,8 @@ caption { background-color: #eee; padding-left: 10px; border-radius: 2px; }
     overflow-x: hidden;
     overflow-y: hidden;
 }
-.ztys-filter a { padding: 4px 10px; cursor: pointer;}
+.ztys-list a { padding: 4px 10px; cursor: pointer;}
+.ztys-list li { padding: 6px 10px;}
 
 /*------ New ------*/
 .ztys-form { 

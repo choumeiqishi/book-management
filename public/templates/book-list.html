@@ -1,9 +1,9 @@
 <div class="container-fluid margin-top-15">
     <div class="row">
         <div class="col-sm-2 padding-right-0 sidebar">
-            <div class="panel panel-default f12">
+            <div class="panel panel-default f12 margin-bottom-15">
                 <div class="panel-heading padding-5 padding-left-10">类别: </div>
-                <ul class="list-group ztys-filter">
+                <ul class="list-group ztys-list">
                     <a class="list-group-item" ng-repeat="category in categoryList" 
                             ng-click="filterCategory(category.value)" 
                             ng-class="{active: category.selected}">
@@ -15,7 +15,7 @@
 
             <div class="panel panel-default f12">
                 <div class="panel-heading padding-5 padding-left-10">状态: </div>
-                <ul class="list-group ztys-filter">
+                <ul class="list-group ztys-list">
                     <a class="list-group-item" ng-repeat="status in statusList" 
                             ng-click="filterStatus(status.value)" 
                             ng-class="{active: status.selected}">
@@ -30,7 +30,7 @@
             <form class="form">
                 <div class="form-group has-feedback margin-bottom-0">
                     <span class="glyphicon glyphicon-search form-control-feedback grey-b" aria-hidden="true"></span> 
-                    <input type="text" class="form-control input-sm" placeholder="书名，作者，标签，出版社" ng-model="search.$"> 
+                    <input type="text" class="form-control input-sm" placeholder="搜索" ng-model="search.$"> 
                     
                 </div>
             </form>
