@@ -15,20 +15,24 @@
 .ztys-logo-wrapper img { max-width: 100%; }
 
 /*----- Common -----*/
+caption { background-color: #eee; padding-left: 10px; border-radius: 2px; }
 .ztys-star { color: #ff6600; }
 .ztys-star-grey { color: #bbb; }
 .ztys-appraise { font-size: 16px; }
+.badge { background-color: #ddd; color: #666; }
 
 /*------ List ------*/
-.ztys-filter-condition li { 
-    float: left; 
-    font-size: 0.75em;
-    padding: 5px 10px;
-    margin: 15px 15px 0 0; 
+.sidebar {
+    position: fixed;
+    top: 66px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
-.ztys-filter-condition li:first-child { font-weight: bold; }
-.ztys-filter-condition li:not(:first-child):hover { cursor: pointer; background-color: #ccc; }
-.ztys-filter-condition .active { background-color: #0073ea; color: #fff; font-weight: bold; }
+.ztys-filter a { padding: 4px 10px; cursor: pointer;}
 
 /*------ New ------*/
 .ztys-form { 

@@ -81,7 +81,7 @@ bookServices.factory('BookService', [function(){
             isbn: 'WXB193321-4',
             label: '时代',
             press: '陕西师范大学',
-            date: '2012-12-12',
+            date: '2013-12-12',
             position: 2,
             status: 2,
             stars: 4,
@@ -96,7 +96,7 @@ bookServices.factory('BookService', [function(){
             isbn: 'WXB193321-4',
             label: '时代四部曲',
             press: '陕西理工大学',
-            date: '2012-12-12',
+            date: '2014-12-12',
             position: 3,
             status: 1,
             stars: 4,
@@ -111,7 +111,7 @@ bookServices.factory('BookService', [function(){
             isbn: 'WXB193321-4',
             label: '时代四部曲',
             press: '陕西理工大学',
-            date: '2012-12-12',
+            date: '2015-12-12',
             position: 3,
             status: 1,
             stars: 4,
@@ -122,6 +122,20 @@ bookServices.factory('BookService', [function(){
 
     o.addBook = function (book) {
     	this.books.push(book);
+    };
+
+    // get book count by catetory or status
+    o.getBookCount = function (key, value) {
+        if (value === 0) {
+            return this.books.length;
+        }
+        var count = 0;
+        for (var i=0; i<this.books.length; i++) {
+            if (this.books[i][key] === value) {
+                count += 1;
+            }
+        }
+        return count;
     };
 
     return o;

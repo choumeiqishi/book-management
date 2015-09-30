@@ -51,6 +51,11 @@ bookControllers.controller('ListController', ['$scope', 'BookService', 'BookStat
         });
         this.status.selected = true;
     };
+
+    $scope.getBookCount = function (key, value) {
+        console.log(key + ', ' + value);
+        return BookService.getBookCount(key, value);
+    };
 }]);
 
 bookControllers.controller('CreationController', ['$scope', 'BookService', 'BookCategory', 'BookPosition', 
