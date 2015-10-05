@@ -11,7 +11,6 @@ var BookSchema = new mongoose.Schema({
 	position: String,
 	status: Number,
 	stars: Number,
-	cover: String,
 	notes: String
 });
 

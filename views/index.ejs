@@ -10,7 +10,6 @@
     	<script src="/angular/angular.min.js"></script>
     	<script src="/angular-ui-router/build/angular-ui-router.min.js"></script>
     	<script src="/jquery/dist/jquery.min.js"></script>
-    	<script src="/ng-file-upload/dist/ng-file-upload.min.js"></script>
     	<script src="/javascripts/bookApp.js"></script>
     	<script src="/javascripts/controllers.js"></script>
     	<script src="/javascripts/services.js"></script>
@@ -39,8 +38,9 @@
 	                </div>
 	                <div id="navbar" class="navbar-collapse collapse">
 	                    <ul class="nav navbar-nav" id="ztysMenu">
-	                        <li ng-class="{active: $state.includes('books')}"><a href="/#/books">所有图书</a></li>
+	                        <li ng-class="{active: $state.includes('books')}"><a href="/#/books">所有藏书</a></li>
 	                        <li ng-class="{active: $state.includes('create')}"><a href="/#/create">录入新书</a></li>
+	                        <li ng-class="{active: $state.includes('statistics')}"><a href="/#/statistics">统计</a></li>
 	                    </ul>
 	                </div>
 	            </div>

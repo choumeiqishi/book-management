@@ -12,9 +12,11 @@ bookControllers.controller('ListController', ['$scope', 'BookService', 'BookStat
     $scope.statusList = angular.copy(BookStatus.list);
     $scope.positions = BookPosition.list;
     $scope.books = BookService.books;
-    console.log($scope.books);
+    
     $scope.filterCategory = function (category) {
         $scope.strict = true;
+        $scope.search.$ = undefined;
+
         if (category === 0) {
             $scope.search.category = undefined;
         } else {
@@ -29,6 +31,8 @@ bookControllers.controller('ListController', ['$scope', 'BookService', 'BookStat
 
     $scope.filterStatus = function (status) {
         $scope.strict = true;
+        $scope.search.$ = undefined;
+
         if (status === 0) {
             $scope.search.status = undefined;
         } else {
@@ -111,7 +115,6 @@ bookControllers.controller('CreationController', ['$scope', 'BookService', 'Book
             position: parseInt($scope.positions.positionSelect),
             status: parseInt($scope.status),
             stars: parseInt($scope.stars),
-            cover: $scope.cover,
             notes: $scope.notes
         };
 
