@@ -3,19 +3,19 @@
 		<div class="form-group">
 			<label class="col-sm-3 control-label">书名</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control input-sm" ng-model="title">
+				<input type="text" class="form-control input-sm" ng-model="title" required>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">作者</label>
 			<div class="col-sm-3">
-				<input type="text" class="form-control input-sm" ng-model="author">
+				<input type="text" class="form-control input-sm" ng-model="author" required>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">类别</label>
 			<div class="col-sm-3">
-				<select class="form-control input-sm" id="categorySelect" ng-model="categories.categorySelect">
+				<select class="form-control input-sm" ng-model="categories.categorySelect" required>
 					<option value="">请选择</option>
 					<option ng-repeat="category in categories.list" value="{{category.value}}">
 						{{ category.label }}
@@ -48,9 +48,9 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label">位置</label>
+			<label class="col-sm-3 control-label">书架位置</label>
 			<div class="col-sm-3">
-				<select class="form-control input-sm" id="positionSelect" ng-model="positions.positionSelect">
+				<select class="form-control input-sm" id="positionSelect" ng-model="positions.positionSelect" required>
 					<option value="">请选择</option>
 					<option ng-repeat="position in positions.list" value="{{position.value}}">
 						{{ position.label }}
@@ -68,23 +68,22 @@
   					<input type="radio" ng-model="status" value="2"> 正在读
 				</label>
 				<label class="margin-left-15">
-  					<input type="radio" ng-model="status" value="1" checked> 未读
+  					<input type="radio" ng-model="status" value="1"> 未读
 				</label>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">评价</label>
 			<div class="col-sm-3">
-				<input type="range" class="form-control input-sm" min="0" max="5" step="1" ng-model="stars">
+				<input type="range" class="form-control input-sm" min="0" max="5" step="1" ng-model="stars" ng-init="stars=3">
 			</div>
-			<p class="help-block">{{ stars }}</p>
+			<p class="help-block"><span class="glyphicon glyphicon-star ztys-star" ng-repeat="s in getStars(stars)"></span></p>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">封面</label>
-			<div class="col-sm-3">
-				<input id="cover" type="file" class="form-control input-sm" ng-model="cover">
+			<div class="col-sm-6">
+				<input type="text" class="form-control input-sm" ng-model="cover">
 			</div>
-			<p class="help-block">400x600</p>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">备注</label>

@@ -30,12 +30,12 @@
             <form class="form">
                 <div class="form-group has-feedback margin-bottom-0">
                     <span class="glyphicon glyphicon-search form-control-feedback grey-b" aria-hidden="true"></span> 
-                    <input type="text" class="form-control input-sm" placeholder="搜索" ng-model="search.$"> 
-                    
+                    <input type="text" class="form-control input-sm" placeholder="搜索" ng-model="search.$" 
+                            ng-change="strict=false" id="searchInput">
                 </div>
             </form>
             <table class="table table-striped table-hover margin-top-15 margin-bottom-0">
-                <caption>图书列表 ({{ (books | filter:search).length }})</caption>
+                <caption>图书列表 ({{ (books | filter:search:strict).length }})</caption>
                 <thead>
                     <tr>
                         <th>书名</th>
@@ -50,8 +50,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="book in books | filter:search">
-                        <td><a href="#/books/{{ book.id }}">{{ book.title }}</a></td>
+                    <tr ng-repeat="book in books | filter:search:strict | orderBy:'category'">
+                        <td><a href="#/books/{{ book._id }}">{{ book.title }}</a></td>
                         <td>{{ book.author }}</td>
                         <td>{{ categoryList[book.category].label }}</td>
                         <td>{{ book.label }}</td>
@@ -61,7 +61,7 @@
                         <td>
                             <span class="glyphicon glyphicon-ok green" ng-show="book.status === 3" title="已读"></span>
                             <span class="glyphicon glyphicon-bookmark blue" ng-show="book.status === 2" title="正在读"></span>
-                            <span class="glyphicon glyphicon-time orange" ng-show="book.status === 1" title="未读"></span>
+                            <span class="glyphicon glyphicon-time grey-b" ng-show="book.status === 1" title="未读"></span>
                         </td>
                         <td>
                             <span class="glyphicon glyphicon-star ztys-star" ng-repeat="s in getStars(book.stars)"></span>

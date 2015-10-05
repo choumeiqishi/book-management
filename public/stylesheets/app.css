@@ -45,7 +45,7 @@ caption { background-color: #eee; padding-left: 10px; border-radius: 2px; }
 }
 
 /*------ Detail ------*/
-.ztys-book-img { border: 1px solid #ddd; padding: 10px; }
+.ztys-book-img { border: 1px solid #ddd; padding: 10px; width: 100%; height: 100%; }
 
 /*------ Search ------*/
 .ztys-search-result { 

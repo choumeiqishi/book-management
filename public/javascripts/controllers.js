@@ -4,11 +4,6 @@
 
 var bookControllers = angular.module('bookControllers', ['bookServices']);
 
-// menu nav controller
-bookControllers.controller('NavController', ['$scope', function ($scope) {
-    
-}]);
-
 // book list controller
 bookControllers.controller('ListController', ['$scope', 'BookService', 'BookStatus', 'BookCategory', 'BookPosition', 
         function ($scope, BookService, BookStatus, BookCategory, BookPosition) {
@@ -17,16 +12,9 @@ bookControllers.controller('ListController', ['$scope', 'BookService', 'BookStat
     $scope.statusList = angular.copy(BookStatus.list);
     $scope.positions = BookPosition.list;
     $scope.books = BookService.books;
-
-    $scope.getStars = function (count) {
-        var arr = [];
-        for (var i = 1; i <= count; i++) {
-            arr.push(i);
-        }
-        return arr;
-    };
-
+    console.log($scope.books);
     $scope.filterCategory = function (category) {
+        $scope.strict = true;
         if (category === 0) {
             $scope.search.category = undefined;
         } else {
@@ -40,6 +28,7 @@ bookControllers.controller('ListController', ['$scope', 'BookService', 'BookStat
     };
 
     $scope.filterStatus = function (status) {
+        $scope.strict = true;
         if (status === 0) {
             $scope.search.status = undefined;
         } else {
@@ -53,11 +42,46 @@ bookControllers.controller('ListController', ['$scope', 'BookService', 'BookStat
     };
 
     $scope.getBookCount = function (key, value) {
-        console.log(key + ', ' + value);
         return BookService.getBookCount(key, value);
     };
 }]);
 
+// book detail controller
+bookControllers.controller('DetailController', ['$scope', '$stateParams', 'BookService', 'BookCategory', 'BookPosition', 'book',  
+        function ($scope, $stateParams, BookService, BookCategory, BookPosition, book) {
+
+    $scope.book = book;
+    $scope.book.date = new Date($scope.book.date);
+
+    var categories = angular.copy(BookCategory.list);
+    categories.shift();
+
+    $scope.categories = {
+        categorySelect: $scope.book.category + '',
+        list: categories
+    };
+
+    $scope.positions = {
+        positionSelect: $scope.book.position + '',
+        list: BookPosition.list
+    };
+
+    // update book
+    $scope.updateBook = function () {
+        $scope.book.category = parseInt($scope.categories.categorySelect);
+        $scope.book.position = parseInt($scope.positions.positionSelect);
+        BookService.updateBook($scope.book);
+        $scope.$state.go('books');
+    };
+
+    // remove a book
+    $scope.removeBook = function () {
+        BookService.removeBook($scope.book._id);
+        $scope.$state.go('books');
+    };
+}]);
+
+// book creation controller
 bookControllers.controller('CreationController', ['$scope', 'BookService', 'BookCategory', 'BookPosition', 
         function ($scope, BookService, BookCategory, BookPosition) {
     var categories = angular.copy(BookCategory.list);
@@ -71,6 +95,9 @@ bookControllers.controller('CreationController', ['$scope', 'BookService', 'Book
         positionSelect: null,
         list: BookPosition.list
     };
+
+    $scope.date = new Date();
+    $scope.status = 1;
 
     $scope.addBook = function () {
         var newBook = {
@@ -88,9 +115,7 @@ bookControllers.controller('CreationController', ['$scope', 'BookService', 'Book
             notes: $scope.notes
         };
 
-        console.log(newBook);
-        console.log($('#cover').val());
-        BookService.addBook(newBook);
+        BookService.createBook(newBook);
 
         $scope.$state.go('books');
     };

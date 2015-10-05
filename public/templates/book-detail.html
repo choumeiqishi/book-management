@@ -1,104 +1,107 @@
 <div class="container-fluid margin-top-15">
 	<div class="row">
 		<div class="col-md-3">
-			<img class="ztys-book-img" src="images/huangjinshidai-wangxiaobo.jpg">
+			<img class="ztys-book-img" src="{{ 'images/covers/' + book.cover}}">
 		</div>
 		<div class="col-md-9">
 			<form class="form-horizontal f12">
 				<div class="form-group">
 					<label class="col-sm-3 control-label">书名</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control input-sm">
+						<input type="text" class="form-control input-sm" ng-model="book.title" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">作者</label>
 					<div class="col-sm-3">
-						<input type="text" class="form-control input-sm">
+						<input type="text" class="form-control input-sm" ng-model="book.author" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">类别</label>
 					<div class="col-sm-3">
-						<select class="form-control input-sm">
-							<option>文学</option>
-							<option>少儿</option>
+						<select class="form-control input-sm" ng-model="categories.categorySelect" required>
+							<option ng-repeat="category in categories.list" value="{{category.value}}">
+								{{ category.label }}
+							</option>
 						</select>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">ISBN</label>
 					<div class="col-sm-3">
-						<input type="text" class="form-control input-sm">
+						<input type="text" class="form-control input-sm" ng-model="book.isbn">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">标签</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control input-sm">
+						<input type="text" class="form-control input-sm" ng-model="book.label">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">出版社</label>
 					<div class="col-sm-3">
-						<input type="text" class="form-control input-sm">
+						<input type="text" class="form-control input-sm" ng-model="book.press">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">收藏日期</label>
 					<div class="col-sm-3">
-						<input type="date" class="form-control input-sm">
+						<input type="date" class="form-control input-sm" ng-model="book.date">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 control-label">位置</label>
+					<label class="col-sm-3 control-label">书架位置</label>
 					<div class="col-sm-3">
-						<select class="form-control input-sm">
-							<option>A1</option>
-							<option>A2</option>
-						</select>
+						<select class="form-control input-sm" ng-model="positions.positionSelect" required>
+					<option ng-repeat="position in positions.list" value="{{position.value}}">
+						{{ position.label }}
+					</option>
+				</select>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">状态</label>
 					<div class="col-sm-6 padding-top-5">
 						<label>
-		  					<input type="radio" name="bookStatus" value="2"> 已读
+		  					<input type="radio" ng-model="book.status" value="3"> 已读
 						</label>
 						<label class="margin-left-15">
-		  					<input type="radio" name="bookStatus" value="1"> 正在读
+		  					<input type="radio" ng-model="book.status" value="2"> 正在读
 						</label>
 						<label class="margin-left-15">
-		  					<input type="radio" name="bookStatus" value="0" checked> 未读
+		  					<input type="radio" ng-model="book.status" value="1"> 未读
 						</label>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">评价</label>
 					<div class="col-sm-3">
-						<input type="range" class="form-control input-sm" min="0" max="5" step="1" ng-model="appraise">
+						<input type="range" class="form-control input-sm" min="0" max="5" step="1" ng-model="book.stars">
 					</div>
-					<p class="help-block">{{ appraise }}</p>
+					<p class="help-block">
+						<span class="glyphicon glyphicon-star ztys-star" ng-repeat="s in getStars(book.stars)"></span>
+					</p>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">封面</label>
-					<div class="col-sm-3">
-						<input type="file" class="form-control input-sm">
+					<div class="col-sm-6">
+						<input type="text" class="form-control input-sm" ng-model="book.cover">
 					</div>
-					<p class="help-block">400x600</p>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">备注</label>
 					<div class="col-sm-6">
-						<textarea class="form-control input-sm" rows="4"></textarea>
+						<textarea class="form-control input-sm" rows="4" ng-model="book.notes">{{  book.notes }}</textarea>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-6 col-sm-offset-3">
-						<button type="button" class="btn btn-success btn-sm">
+						<button type="button" class="btn btn-success btn-sm" ng-click="updateBook()">
 							<span class="glyphicon glyphicon-save" aria-hidden="true"></span> 保存
 						</button>
-						<button type="button" class="btn btn-danger btn-sm">
+						<button type="button" class="btn btn-danger btn-sm" ng-click="removeBook()">
 							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 删除
 						</button>
 					</div>

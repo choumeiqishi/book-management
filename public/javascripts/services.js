@@ -52,76 +52,40 @@ bookServices.value('BookPosition', {
 	]
 });
 
-bookServices.factory('BookService', [function(){
+bookServices.factory('BookService', ['$http', function($http){
     var o = {
     	books: []
     };
 
-    o.books = [
-        {
-            id: '1',
-            title: '黄金时代',
-            author: '王小波',
-            category: 1,
-            isbn: 'WXB193321-3',
-            label: '时代三部曲',
-            press: '陕西师范大学',
-            date: '2012-12-12',
-            position: 1,
-            status: 3,
-            stars: 5,
-            cover: 'images/literature/huangjinshidai-wangxiaobo.jpg',
-            notes: '看过多遍的一本小说'
-        },
-        {
-            id: '2',
-            title: '白银时代',
-            author: '李银河',
-            category: 2,
-            isbn: 'WXB193321-4',
-            label: '时代',
-            press: '陕西师范大学',
-            date: '2013-12-12',
-            position: 2,
-            status: 2,
-            stars: 4,
-            cover: 'images/literature/baiyinshidai-wangxiaobo.jpg',
-            notes: '看过多遍的一本小说'
-        },
-        {
-            id: '3',
-            title: '青铜时代',
-            author: '王小波',
-            category: 3,
-            isbn: 'WXB193321-4',
-            label: '时代四部曲',
-            press: '陕西理工大学',
-            date: '2014-12-12',
-            position: 3,
-            status: 1,
-            stars: 4,
-            cover: 'images/literature/baiyinshidai-wangxiaobo.jpg',
-            notes: '看过多遍的一本小说'
-        },
-        {
-            id: '4',
-            title: '黑铁时代',
-            author: '王小波',
-            category: 3,
-            isbn: 'WXB193321-4',
-            label: '时代四部曲',
-            press: '陕西理工大学',
-            date: '2015-12-12',
-            position: 4,
-            status: 1,
-            stars: 4,
-            cover: 'images/literature/baiyinshidai-wangxiaobo.jpg',
-            notes: '看过多遍的一本小说'
-        }
-    ];
+    o.getAllBooks = function () {
+        return $http.get('/books').success(function (data) {
+            angular.copy(data, o.books);
+        });
+    };
 
-    o.addBook = function (book) {
-    	this.books.push(book);
+    o.getBook = function (bookId) {
+        return $http.get('/books/' + bookId).then(function(res){
+            return res.data;
+        });
+    };
+
+    o.createBook = function (book) {
+    	return $http.post('/books', book).success(function (data) {
+            o.books.push(data);
+        });
+    };
+
+    o.updateBook = function (book) {
+        return $http.put('/books/' + book._id, book).then(function (res) {
+            return res.data;
+        });
+    };
+
+    o.removeBook = function (bookId) {
+        return $http.delete('/books/' + bookId).then(function (res) {
+            console.log(res.data);
+            return res.data;
+        });
     };
 
     // get book count by catetory or status
