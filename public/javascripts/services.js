@@ -102,5 +102,27 @@ bookServices.factory('BookService', ['$http', function($http){
         return count;
     };
 
+    // get count statistics by two conditions
+    o.getCountByConditions = function (k1, v1, k2, v2) {
+        var count = 0;
+
+        for (var i=0; i<this.books.length; i++) {
+            
+            if (this.books[i][k1] === v1 && this.books[i][k2] === v2) {
+                count += 1;
+            }
+        }
+        return count;
+    }
+
+    // count
+    o.getCount = function (query) {
+        if (query) {
+            return $http.post('/bookcount/', query).then(function(res){
+                return res.data;
+            });
+        }
+    };
+
     return o;
 }]);

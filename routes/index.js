@@ -9,15 +9,15 @@ router.get('/', function(req, res, next) {
 });
 
 router.param('book', function(req, res, next, id) {
-  var query = Book.findById(id);
+  	var query = Book.findById(id);
 
-  query.exec(function (err, book){
-    if (err) { return next(err); }
-    if (!book) { return next(new Error('can\'t find book')); }
+  	query.exec(function (err, book){
+    	if (err) { return next(err); }
+    	if (!book) { return next(new Error('can\'t find book')); }
 
-    req.book = book;
-    return next();
-  });
+    	req.book = book;
+    	return next();
+  	});
 });
 
 // get book list
@@ -48,7 +48,6 @@ router.get('/books/:book', function (req, res) {
 
 // update a book
 router.put('/books/:book', function (req, res, next) {
-	console.log(req.body);
 	Book.findByIdAndUpdate(req.book._id, req.body, function(err, book) {
 	  	if (err) {
 	  		return next(err);
@@ -64,6 +63,16 @@ router.delete('/books/:book', function (req, res, next) {
   			return next(err);
   		}
   		return res.json('book deleted');
+	});
+});
+
+// query book
+router.post('/bookcount', function (req, res, next) {
+	Book.count(req.body, function (err, count) {
+		if (err) {
+			return next(err);
+		}
+		return res.json(count);
 	});
 });
 

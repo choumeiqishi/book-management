@@ -45,6 +45,17 @@ bookApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         url: '/create',
         templateUrl: '/templates/book-new.html',
         controller: 'CreationController'
+    }).
+    state('statistics', {
+        cache: false,
+        url: '/statistics',
+        templateUrl: '/templates/book-statistics.html',
+        controller: 'StatisticsController',
+        resolve: {
+            postPromise: ['BookService', function(BookService){
+                return BookService.getAllBooks();
+            }]
+        }
     });
 
     $urlRouterProvider.otherwise('books');
