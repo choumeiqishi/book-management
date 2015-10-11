@@ -38,22 +38,22 @@
                 <caption>藏书列表 ({{ (books | filter:search:strict).length }})</caption>
                 <thead>
                     <tr>
-                        <th>书名</th>
-                        <th>作者</th>
-                        <th>类别</th>
-                        <th>标签</th>
-                        <th>出版社</th>
-                        <th>ISBN</th>
+                        <th class="header" ng-click="orderBooks('title', $event)">书名</th>
+                        <th class="header" ng-click="orderBooks('author', $event)">作者</th>
+                        <th class="header headerSortDown" ng-click="orderBooks('category', $event)">类别</th>
+                        <th class="header" ng-click="orderBooks('label', $event)">标签</th>
+                        <th class="header" ng-click="orderBooks('press', $event)">出版社</th>
+                        <th class="header" ng-click="orderBooks('isbn', $event)">ISBN</th>
                         <!--
                         <th>收藏日期</th>
                         -->
-                        <th>书架位置</th>
-                        <th>状态</th>
-                        <th>评价</th>
+                        <th class="header" ng-click="orderBooks('position', $event)">书架位置</th>
+                        <th class="header" ng-click="orderBooks('status', $event)">状态</th>
+                        <th class="header" ng-click="orderBooks('stars', $event)">评价</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="book in books | filter:search:strict | orderBy:'category'">
+                    <tr ng-repeat="book in books | filter:search:strict | orderBy: orderField">
                         <td><a href="#/books/{{ book._id }}">{{ book.title }}</a></td>
                         <td>{{ book.author }}</td>
                         <td>{{ categoryList[book.category].label }}</td>

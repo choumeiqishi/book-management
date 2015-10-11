@@ -11,6 +11,7 @@ bookControllers.controller('ListController', ['$scope', 'BookService', 'BookStat
     $scope.categoryList = angular.copy(BookCategory.list);
     $scope.statusList = angular.copy(BookStatus.list);
     $scope.positions = BookPosition.list;
+    $scope.orderField = 'category';
     $scope.books = BookService.books;
     
     $scope.filterCategory = function (category) {
@@ -48,6 +49,27 @@ bookControllers.controller('ListController', ['$scope', 'BookService', 'BookStat
     $scope.getBookCount = function (key, value) {
         return BookService.getBookCount(key, value);
     };
+
+    $scope.orderBooks = function (field, clickEvent) {
+        var currentTh = angular.element(clickEvent.target);
+        
+        // order field
+        if (this.orderField === field) {
+            this.orderField = '-' + field;
+        } else {
+            this.orderField = field;           
+        }
+
+        // th class
+        if (currentTh.hasClass('headerSortDown')) {
+            currentTh.removeClass('headerSortDown').addClass('headerSortUp');
+        } else if (currentTh.hasClass('headerSortUp')) {
+            currentTh.removeClass('headerSortUp').addClass('headerSortDown');
+        } else {
+            currentTh.parent().children().removeClass('headerSortDown');
+            currentTh.addClass('headerSortDown');
+        }
+    }
 }]);
 
 // book detail controller
