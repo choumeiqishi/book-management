@@ -52,7 +52,7 @@ bookControllers.controller('ListController', ['$scope', 'BookService', 'BookStat
 
     $scope.orderBooks = function (field, clickEvent) {
         var currentTh = angular.element(clickEvent.target);
-        
+
         // order field
         if (this.orderField === field) {
             this.orderField = '-' + field;
@@ -66,7 +66,7 @@ bookControllers.controller('ListController', ['$scope', 'BookService', 'BookStat
         } else if (currentTh.hasClass('headerSortUp')) {
             currentTh.removeClass('headerSortUp').addClass('headerSortDown');
         } else {
-            currentTh.parent().children().removeClass('headerSortDown');
+            currentTh.parent().children().removeClass('headerSortDown').removeClass('headerSortUp');
             currentTh.addClass('headerSortDown');
         }
     }
