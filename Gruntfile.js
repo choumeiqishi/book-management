@@ -28,7 +28,7 @@ module.exports = function (grunt) {
 		
 		// JS 语法检查
 		jshint: {
-			files: ['Gruntfile.js', 'public/javascripts/*.js'],
+			files: ['Gruntfile.js', 'public/javascripts/*.js', 'app.js', 'models/*.js', 'config/*.js', 'routes/*.js'],
 			options: {
 				globals: {
 					angular: false,
