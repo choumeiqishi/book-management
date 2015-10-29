@@ -1,5 +1,3 @@
-'use strict';
-
 /* Services */
 
 var bookServices = angular.module('bookServices', []);
@@ -113,7 +111,7 @@ bookServices.factory('BookService', ['$http', function($http){
             }
         }
         return count;
-    }
+    };
 
     // count
     o.getCount = function (query) {

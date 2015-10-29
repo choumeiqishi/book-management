@@ -1,5 +1,3 @@
-'use strict';
-
 /* App Module */
 
 var bookApp = angular.module('bookApp', ['ui.router', 'bookControllers']);
