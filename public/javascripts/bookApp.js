@@ -54,6 +54,26 @@ bookApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
                 return BookService.getAllBooks();
             }]
         }
+    }).
+    state('login', {
+        url: '/login',
+        templateUrl: '/templates/login.html',
+        controller: 'AuthController',
+        onEnter: ['$state', 'auth', function ($state, auth) {
+            if (auth.isLoggedIn()) {
+                $state.go('books');
+            }
+        }]
+    }).
+    state('register', {
+        url: '/register',
+        templateUrl: '/templates/register.html',
+        controller: 'AuthController',
+        onEnter: ['$state', 'auth', function ($state, auth) {
+            if (auth.isLoggedIn()) {
+                $state.go('books');
+            }
+        }]
     });
 
     $urlRouterProvider.otherwise('books');

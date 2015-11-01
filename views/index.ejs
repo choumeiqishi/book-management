@@ -10,6 +10,7 @@
     	<script src="/angular/angular.min.js"></script>
     	<script src="/angular-ui-router/build/angular-ui-router.min.js"></script>
     	<script src="/jquery/dist/jquery.min.js"></script>
+    	<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
     	<script src="/libs/echarts/echarts.js"></script>
     	<script src="/dist/book-management.min.js"></script>
   	</head>
@@ -34,11 +35,23 @@
 	                        <h1 class="ztys-system-title">左图右书</h1>
 	                    </span>
 	                </div>
-	                <div id="navbar" class="navbar-collapse collapse">
+	                <div id="navbar" class="navbar-collapse collapse" ng-controller="NavController">
 	                    <ul class="nav navbar-nav" id="ztysMenu">
 	                        <li ng-class="{active: $state.includes('books')}"><a href="/#/books">所有藏书</a></li>
-	                        <li ng-class="{active: $state.includes('create')}"><a href="/#/create">录入新书</a></li>
+	                        <li ng-class="{active: $state.includes('create')}" ng-show="isLoggedIn()">
+	                        	<a href="/#/create">录入新书</a>
+	                        </li>
 	                        <li ng-class="{active: $state.includes('statistics')}"><a href="/#/statistics">统计</a></li>
+	                    </ul>
+	                    <ul class="nav navbar-nav navbar-right">
+	                    	<li class="dropdown" ng-show="isLoggedIn()">
+          						<a class="dropdown-toggle f14" data-toggle="dropdown" role="button">{{ currentUser }} <span class="caret"></span></a>
+      							<ul class="dropdown-menu f14" role="menu">
+        							<li><a href="">个人信息</a></li>
+        							<li><a href="" ng-click="logOut()">退出</a></li>
+      							</ul>
+    						</li>
+    						<li ng-hide="isLoggedIn()"><a href="/#/login">登录</a></li>
 	                    </ul>
 	                </div>
 	            </div>

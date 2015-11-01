@@ -8,10 +8,10 @@ passport.use(new LocalStrategy(
 	    User.findOne({ username: username }, function (err, user) {
 	      	if (err) { return done(err); }
 	      	if (!user) {
-	        	return done(null, false, { message: 'Incorrect username.' });
+	        	return done(null, false, { message: '用户名错误.' });
 	      	}
 	      	if (!user.validPassword(password)) {
-	        	return done(null, false, { message: 'Incorrect password.' });
+	        	return done(null, false, { message: '密码错误.' });
 	      	}
 	      	return done(null, user);
 	    });

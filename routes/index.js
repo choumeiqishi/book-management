@@ -6,6 +6,7 @@ var jwt = require('express-jwt');
 var router = express.Router();
 var Book = mongoose.model('Book');
 var User = mongoose.model('User');
+var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -35,7 +36,7 @@ router.get('/books', function (req, res, next) {
 });
 
 // create a new book
-router.post('/books', function (req, res, next) {
+router.post('/books', auth, function (req, res, next) {
 	var book = new Book(req.body);
 	book.save(function (err, book) {
 		if (err) {
@@ -51,7 +52,7 @@ router.get('/books/:book', function (req, res) {
 });
 
 // update a book
-router.put('/books/:book', function (req, res, next) {
+router.put('/books/:book', auth, function (req, res, next) {
 	Book.findByIdAndUpdate(req.book._id, req.body, function(err, book) {
 	  	if (err) {
 	  		return next(err);
@@ -61,7 +62,7 @@ router.put('/books/:book', function (req, res, next) {
 });
 
 // remove a book
-router.delete('/books/:book', function (req, res, next) {
+router.delete('/books/:book', auth, function (req, res, next) {
 	Book.findByIdAndRemove(req.book._id, function(err) {
   		if (err) {
   			return next(err);

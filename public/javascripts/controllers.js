@@ -2,6 +2,35 @@
 
 var bookControllers = angular.module('bookControllers', ['bookServices']);
 
+// nav
+bookControllers.controller('NavController', ['$scope', 'auth', function ($scope, auth) {
+    console.log('username='+auth.currentUser);
+    $scope.isLoggedIn = auth.isLoggedIn;
+    $scope.currentUser = auth.currentUser;
+    $scope.logOut = auth.logOut;
+}]);
+
+// auth
+bookControllers.controller('AuthController', ['$scope', '$state', 'auth', function ($scope, $state, auth) {
+    $scope.user = {};
+
+    $scope.register = function () {
+        auth.register($scope.user).error(function (error) {
+            $scope.error = error;
+        }).then(function () {
+            $state.go('books');
+        });
+    };
+
+    $scope.logIn = function () {
+        auth.logIn($scope.user).error(function (error) {
+            $scope.error = error;
+        }).then(function () {
+            $state.go('books');
+        });
+    };
+}]);
+
 // book list controller
 bookControllers.controller('ListController', ['$scope', 'BookService', 'BookStatus', 'BookCategory', 'BookPosition', 
         function ($scope, BookService, BookStatus, BookCategory, BookPosition) {

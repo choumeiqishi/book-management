@@ -54,6 +54,26 @@ bookApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
                 return BookService.getAllBooks();
             }]
         }
+    }).
+    state('login', {
+        url: '/login',
+        templateUrl: '/templates/login.html',
+        controller: 'AuthController',
+        onEnter: ['$state', 'auth', function ($state, auth) {
+            if (auth.isLoggedIn()) {
+                $state.go('books');
+            }
+        }]
+    }).
+    state('register', {
+        url: '/register',
+        templateUrl: '/templates/register.html',
+        controller: 'AuthController',
+        onEnter: ['$state', 'auth', function ($state, auth) {
+            if (auth.isLoggedIn()) {
+                $state.go('books');
+            }
+        }]
     });
 
     $urlRouterProvider.otherwise('books');
@@ -62,6 +82,34 @@ bookApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
 /* Controllers */
 
 var bookControllers = angular.module('bookControllers', ['bookServices']);
+
+// nav
+bookControllers.controller('NavController', ['$scope', 'auth', function ($scope, auth) {
+    $scope.isLoggedIn = auth.isLoggedIn;
+    $scope.currentUser = auth.currentUser;
+    $scope.logOut = auth.logOut;
+}]);
+
+// auth
+bookControllers.controller('AuthController', ['$scope', '$state', 'auth', function ($scope, $state, auth) {
+    $scope.user = {};
+
+    $scope.register = function () {
+        auth.register($scope.user).error(function (error) {
+            $scope.error = error;
+        }).then(function () {
+            $state.go('books');
+        });
+    };
+
+    $scope.logIn = function () {
+        auth.logIn($scope.user).error(function (error) {
+            $scope.error = error;
+        }).then(function () {
+            $state.go('books');
+        });
+    };
+}]);
 
 // book list controller
 bookControllers.controller('ListController', ['$scope', 'BookService', 'BookStatus', 'BookCategory', 'BookPosition', 
@@ -473,6 +521,7 @@ bookServices.value('BookCategory', {
 bookServices.value('BookStatus', {
 	list: [
 		{label: '全部', value: 0, selected: true}, 
+        {label: '待购', value: 4},
 		{label: '已读', value: 3}, 
 		{label: '正读', value: 2},
 		{label: '未读', value: 1}
@@ -501,6 +550,57 @@ bookServices.value('BookPosition', {
 		{label: '1-2', value: 18}
 	]
 });
+
+bookServices.factory('auth', ['$http', '$window', function ($http, $window) {
+    var auth = {};
+
+    auth.saveToken = function (token) {
+        $window.localStorage['ztys-token'] = token;
+    };
+
+    auth.getToken = function () {
+        return $window.localStorage['ztys-token'];
+    };
+
+    auth.isLoggedIn = function () {
+        var token = auth.getToken();
+
+        if (token) {
+            var payload = JSON.parse($window.atob(token.split('.')[1]));
+
+            return payload.exp > Date.now() / 1000;
+        } else {
+            return false;
+        }
+    };
+
+    auth.currentUser = function () {
+        if (auth.isLoggedIn) {
+            var token  = auth.getToken();
+            var payload = JSON.parse($window.atob(token.split('.')[1]));
+            
+            return payload.username;
+        }
+    };
+
+    auth.register = function (user) {
+        return $http.post('/register', user).success(function (data) {
+            auth.saveToken(data.token);
+        });
+    };
+
+    auth.logIn = function (user) {
+        return $http.post('/login', user).success(function (data) {
+            auth.saveToken(data.token);
+        });
+    };
+
+    auth.logOut = function () {
+        $window.localStorage.removeItem('ztys-token');
+    };
+
+    return auth;
+}]);
 
 bookServices.factory('BookService', ['$http', function($http){
     var o = {
