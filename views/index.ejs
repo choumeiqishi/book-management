@@ -12,7 +12,9 @@
     	<script src="/jquery/dist/jquery.min.js"></script>
     	<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
     	<script src="/libs/echarts/echarts.js"></script>
-    	<script src="/dist/book-management.min.js"></script>
+    	<script src="/javascripts/bookApp.js"></script>
+    	<script src="/javascripts/controllers.js"></script>
+    	<script src="/javascripts/services.js"></script>
   	</head>
 
   	<body>
@@ -45,9 +47,8 @@
 	                    </ul>
 	                    <ul class="nav navbar-nav navbar-right">
 	                    	<li class="dropdown" ng-show="isLoggedIn()">
-          						<a class="dropdown-toggle f14" data-toggle="dropdown" role="button">{{ currentUser }} <span class="caret"></span></a>
+          						<a class="dropdown-toggle f14" data-toggle="dropdown" role="button">{{ currentUser() }} <span class="caret"></span></a>
       							<ul class="dropdown-menu f14" role="menu">
-        							<li><a href="">个人信息</a></li>
         							<li><a href="" ng-click="logOut()">退出</a></li>
       							</ul>
     						</li>

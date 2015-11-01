@@ -75,7 +75,8 @@ bookServices.factory('auth', ['$http', '$window', function ($http, $window) {
     };
 
     auth.currentUser = function () {
-        if (auth.isLoggedIn) {
+        
+        if (auth.isLoggedIn()) {
             var token  = auth.getToken();
             var payload = JSON.parse($window.atob(token.split('.')[1]));
             
@@ -102,7 +103,7 @@ bookServices.factory('auth', ['$http', '$window', function ($http, $window) {
     return auth;
 }]);
 
-bookServices.factory('BookService', ['$http', function($http){
+bookServices.factory('BookService', ['$http', 'auth', function ($http, auth) {
     var o = {
     	books: []
     };
@@ -120,19 +121,25 @@ bookServices.factory('BookService', ['$http', function($http){
     };
 
     o.createBook = function (book) {
-    	return $http.post('/books', book).success(function (data) {
+    	return $http.post('/books', book, {
+            headers: {Authorization: 'Bearer ' + auth.getToken()}
+        }).success(function (data) {
             o.books.push(data);
         });
     };
 
     o.updateBook = function (book) {
-        return $http.put('/books/' + book._id, book).then(function (res) {
+        return $http.put('/books/' + book._id, book, {
+            headers: {Authorization: 'Bearer ' + auth.getToken()}
+        }).then(function (res) {
             return res.data;
         });
     };
 
     o.removeBook = function (bookId) {
-        return $http.delete('/books/' + bookId).then(function (res) {
+        return $http.delete('/books/' + bookId, null, {
+            headers: {Authorization: 'Bearer ' + auth.getToken()}
+        }).then(function (res) {
             console.log(res.data);
             return res.data;
         });

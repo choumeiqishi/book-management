@@ -90,7 +90,7 @@
 						<textarea class="form-control input-sm" rows="4" ng-model="book.notes">{{  book.notes }}</textarea>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" ng-show="isLoggedIn()">
 					<div class="col-sm-6 col-sm-offset-3">
 						<button type="button" class="btn btn-success btn-sm" ng-click="updateBook()">
 							<span class="glyphicon glyphicon-save" aria-hidden="true"></span> 保存

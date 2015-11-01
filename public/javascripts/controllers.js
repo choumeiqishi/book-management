@@ -4,7 +4,6 @@ var bookControllers = angular.module('bookControllers', ['bookServices']);
 
 // nav
 bookControllers.controller('NavController', ['$scope', 'auth', function ($scope, auth) {
-    console.log('username='+auth.currentUser);
     $scope.isLoggedIn = auth.isLoggedIn;
     $scope.currentUser = auth.currentUser;
     $scope.logOut = auth.logOut;
@@ -100,9 +99,10 @@ bookControllers.controller('ListController', ['$scope', 'BookService', 'BookStat
 }]);
 
 // book detail controller
-bookControllers.controller('DetailController', ['$scope', '$stateParams', 'BookService', 'BookCategory', 'BookPosition', 'book',  
-        function ($scope, $stateParams, BookService, BookCategory, BookPosition, book) {
+bookControllers.controller('DetailController', ['$scope', '$stateParams', 'BookService', 'BookCategory', 'BookPosition', 'book', 'auth', 
+        function ($scope, $stateParams, BookService, BookCategory, BookPosition, book, auth) {
 
+    $scope.isLoggedIn = auth.isLoggedIn;
     $scope.book = book;
     $scope.book.date = new Date($scope.book.date);
 
